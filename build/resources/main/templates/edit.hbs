@@ -1,0 +1,37 @@
+{{#partial "title"}}Edit: {{ entry.title }}{{/partial}}
+
+{{#partial "container-content"}}<div class="edit-entry">
+    <h2>Edit Entry</h2>
+    <form action="/{{ entry.slug }}/edit" method="post">
+        <label for="title"> Title</label>
+        <input type="text" name="title" value="{{ entry.title }}"><br>
+        <label for="tagListString">Tags:</label>
+        <input type="text" name="tagListString" value="{{ tagListString }}"><br>
+        <label for="entry">Entry</label>
+        <textarea rows="5" name="entry">{{ entry.content }}</textarea>
+        <input type="submit" value="Save Entry" class="button" formnovalidate>
+        <input type="submit" name="delete" value="Delete Post" class="button" formnovalidate>
+        <a href="/{{ entry.slug }}" class="button button-secondary">Cancel</a>
+    </form>
+</div>
+<section class="entry-comments">
+    <div class="container">
+        <h2>Comments</h2>
+        {{#each comments}}
+            <div class="comment">
+                <div class="new-comment">
+                    <strong>{{ this.author }}</strong>
+                    <time datetime="{{ this.date }}">{{ this.date }}</time>
+                    <form action="/{{ entry.slug }}/edit" method="post">
+                        <textarea rows="5" name="admin-edit-comment" >{{ this.content }}</textarea>
+                        <input type="hidden" name="comment-slug" value="{{ this.slug }}">
+                        <input type="submit" value="Update Comment" class="button" formnovalidate>
+                        <a href="{{ entry.slug }}" class="button button-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</section>{{/partial}}
+
+{{> base.hbs}}

@@ -1,0 +1,16 @@
+{{#partial "title"}}Posts tagged "{{ tag }}"{{/partial}}
+
+{{#partial "container-content"}}<div class="entry-list single">
+    <article class="index-article">
+        <h1>Results for tag: {{ tag }}</h1>
+        <div class="entry">
+            <ul class="tag-list">
+                {{# each entries}}
+                    <li><a href="/{{ this.slug }}">{{ this.title }}</a>  {{ this.date }}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </article>
+</div>{{/partial}}
+
+{{> base.hbs}}
